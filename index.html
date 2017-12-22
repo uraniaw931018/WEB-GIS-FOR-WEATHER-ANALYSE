@@ -1,0 +1,578 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+	<head>
+    <meta charset="utf-8">
+		<title>Our web-gis for weather in Zhejiang province</title>'
+		<link href="./css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="./js/jquery.min.js"></script>
+		 <!-- Custom Theme files -->
+		<link href="./css/style.css" rel='stylesheet' type='text/css' />
+   		 <!-- Custom Theme files -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+		<!---- animated-css ---->
+		<link href="./css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script type="text/javascript" src="./js/jquery.corner.js"></script> 
+		<script src="./js/wow.min.js"></script>
+		<script>
+		 new WOW().init();
+		</script>
+		<!---- animated-css ---->
+		<!---- start-smoth-scrolling---->
+		<script type="text/javascript" src="./js/move-top.js"></script>
+		<script type="text/javascript" src="./js/easing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){		
+					event.preventDefault();
+					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+		</script>
+		 <!---- start-smoth-scrolling---->
+		<!----webfonts--->
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+		<!---//webfonts--->
+		<!----start-top-nav-script---->
+		<script>
+			$(function() {
+				var pull 		= $('#pull');
+					menu 		= $('nav ul');
+					menuHeight	= menu.height();
+				$(pull).on('click', function(e) {
+					e.preventDefault();
+					menu.slideToggle();
+				});
+				$(window).resize(function(){
+	        		var w = $(window).width();
+	        		if(w > 320 && menu.is(':hidden')) {
+	        			menu.removeAttr('style');
+	        		}
+	    		});
+			});
+		</script>
+		<!----//End-top-nav-script---->
+	</head>
+	<body>
+		<div class="bg">
+		<!----- start-header---->
+		<div class="container">
+			<div id="home" class="header wow bounceInDown" data-wow-delay="0.4s">
+					<div class="top-header">
+						<div class="logo">
+							<a href="#">Navigation</a>
+						</div>
+						<!----start-top-nav---->
+						 <nav class="top-nav">
+							<ul class="top-nav">
+								<li><a href="#about" class="scroll">about</a></li>
+								<li><a href="#process" class="scroll">process</a></li>
+								<li><a href="#port" class="scroll">portfolio</a></li>
+								<li class="page-scroll"><a href="#blog" class="scroll">function</a></li>
+								<li class="active-join" class="page-scroll"><a href="#team" class="scroll">contact</a></li>
+							</ul>
+							<a href="#" id="pull"><img src="./images/nav-icon.png" title="menu" /></a>
+						</nav>
+						<div class="clearfix"> </div>
+					</div>
+		  </div>
+		  </div>
+			<!----- //End-header---->
+            <a href="desktop/test.html" class="g-btngreen">GO IN MAP!</a>
+            <a href="yellow/index.html" class="g-btngreen">LOG IN</a>				
+            <!---- banner-info ---->
+			<div class="banner-info">
+				<div class="container">
+					<h1 class="wow fadeIn" data-wow-delay="0.5s"><span>WEB-GIS</span><br /><label>for weather analyse</label></h1>
+				<div class="top-banner-grids wow bounceInUp" data-wow-delay="0.4s">
+					<div class="banner-grid text-center">
+						<span class="top-icon1"> </span>
+						<h3>导航</h3>
+					</div>
+					<div class="banner-grid banner-grid-active text-center">
+						<span class="top-icon2"> </span>
+						<h3>统计</h3>
+					</div>
+					<div class="banner-grid text-center">
+						<span class="top-icon3"> </span>
+						<h3>书签</h3>
+					</div>
+					<div class="banner-grid text-center">
+						<span class="top-icon4"> </span>
+						<h3>打印</h3>
+					</div>
+					<div class="banner-grid text-center">
+						<span class="top-icon5"> </span>
+						<h3>测量</h3>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+			<!---- banner-info ---->
+			<!---- about ---->
+			<div id="about" class="about">
+				<div class="head-section">
+					<div class="container">
+						<h3><span>about</span><label>weather .</label></h3>
+					</div>
+				</div>
+					<!--- about-grids ---->
+					<div class="about-grids">
+						<div class="col-md-4 about-grid about-grid1 wow fadeInLeft" data-wow-delay="0.4s">
+							<div class="about-grid-info">
+								<h4><a href="#">ABOUT 降水量</a></h4>
+								<p>降水量是衡量一个地区降水多少的数据。空气柱里含有水汽总数量也称为可降水量。它对应于空气中的水分全部凝结成雨、雪降落所能形成的降水量。降水量是指从天空降落到地面上的液态和固态（经融化后）降水，没有经过蒸发、渗透和流失而在水平面上积聚的深度。它的单位是毫米。用英文字母p表示。</p>
+							</div>
+							<div class="about-grid-pic">
+							<img src="./images/rain.jpg" height="302" title="name" />
+							</div>
+						</div>
+						<div class="col-md-4 about-grid about-grid2 wow fadeInUp" data-wow-delay="0.4s">
+							<div class="about-grid-pic">
+							<img src="./images/temperature.jpg" title="name" />
+							</div>
+							<div class="about-grid-info">
+								<h4><a href="#">ABOUT 气温</a></h4>
+								<p>天气预报中所说的气温，指在野外空气流通、不受太阳直射下测得的空气温度（一般在百叶箱内测定)。最高气温是一日内气温的最高值，一般出现在14-15时；最低气温是一日内气温的最低值，一般出现日出前。中国用摄氏温标，以℃表示摄氏度。一般一天观测4次，分别为02、08、14、20四个时次；部分测站根据实际情况，一天观测3次，分别为08、14、20三个时次。</p>
+							</div>
+						</div>
+						<div class="col-md-4 about-grid about-grid1 wow fadeInRight" data-wow-delay="0.4s">
+							<div class="about-grid-info">
+								<h4><a href="#">ABOUT 风向</a></h4>
+								<p>风向（wind direction）指风的来向。气象台常用八个方位发布风向的预报，即东、南、西、北、东南、西南、西北和东背。实际测风报告中还经常用0－360°范围内的数字表示风向，以0°为北，90°为东，180°为南，270°为西，余类推。在天气预报中有时还用偏北风、偏南风等名称，偏字表示风向围绕某个方位作小范围摆动。 </p>
+							</div>
+							<div class="about-grid-pic">
+							<img src="./images/wind.jpg" title="name" />
+							</div>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<!--- /about-grids ---->
+	</div>
+			</div>
+			<!---- about ----> 
+			
+			<!--- process --->
+			<div id="process" class="process">
+				<div class="head-section">
+					<div class="container">
+						<h3><span>Our</span><label>process .</label></h3>
+					</div>
+				</div>
+				<div class="container">
+					<div class="process-grids text-center wow bounce" data-wow-delay="0.4s">
+						<div class="col-md-3 process-grid process-grid1 wow bounceInUp" data-wow-delay="0.4s">
+							<span class="p-icon1"> </span>
+							<h4><a href="#">meeting</a></h4>
+						</div>
+						<div class="col-md-3 process-grid process-grid2 wow bounceInDown" data-wow-delay="0.4s">
+							<span class="p-icon2"> </span>
+							<h4><a href="#">analysis</a></h4>
+						</div>
+						<div class="col-md-3 process-grid process-grid3 wow bounceInUp" data-wow-delay="0.4s">
+							<span class="p-icon3"> </span>
+							<h4><a href="#">making</a></h4>
+						</div>
+						<div class="col-md-3 process-grid process-grid4 wow bounceInDown" data-wow-delay="0.4s">
+							<span class="p-icon4"> </span>
+							<h4><a href="#">success</a></h4>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+			<!--- process --->
+			<!--- blog ---->
+			<div id = "blog" class="blog">
+				<div class="head-section">
+					<div class="container">
+						<h3><span>Our</span>
+						<label>FUNCTION .</label></h3>
+					</div>
+				</div>
+				<!---- blog-grids ---->
+				<div class="blog-grids">
+					<div class="container"> 
+					<div class="blog-grids-left">
+							<div class="blog-grid-left wow bounceIn" data-wow-delay="0.4s">
+								<div class="blog-art-pic">
+									<img src="./images/Funct1.jpg" title="name" />
+								</div>
+								<div class="blog-art-info">
+									<h3><a href="#">Navigation</a></h3>
+									<p>You can <span id="blng_part_tran_1_14" data-aligning="#blng_part_src_1_6,#blng_part_tran_1_14">zoom</span> in <span id="blng_part_tran_1_15" data-aligning="#blng_part_src_1_7,#blng_part_tran_1_15">or</span> out on the map, as well as see the extent view of the map and watch your previous view and next view if existed. </p>
+									<ul class="blog-art-info-stags">
+									  
+										<li class="blog-art-info-stags-right">
+											<ul>
+												<li><a href="#"> <label class="b-icon1"> </label>24</a></li>
+												<li><a href="#"> <label class="b-icon2"> </label>9</a></li>
+											</ul>
+										</li>
+										<div class="clearfix"> </div>
+									</ul>
+								</div>
+							</div>
+							<div class="blog-grid-left wow bounceIn" data-wow-delay="0.4s">
+								<div class="blog-art-pic">
+									<img src="./images/funct_locator.jpg" title="name" />
+								</div>
+								<div class="blog-art-info">
+									<h3><a href="#">Locator</a></h3>
+									<p>You can input the place you want to locate in the box and the place you find will show as a shinning red point in the map. </p>
+									<ul class="blog-art-info-stags">
+										
+										<li class="blog-art-info-stags-right">
+											<ul>
+												<li><a href="#"> <label class="b-icon1"> </label>24</a></li>
+												<li><a href="#"> <label class="b-icon2"> </label>9</a></li>
+											</ul>
+										</li>
+										<div class="clearfix"> </div>
+									</ul>
+								</div>
+							</div>
+						<div class="clearfix"> </div>
+						<!---- ---->
+						<div class="blog-grid-left-big wow bounceIn" data-wow-delay="0.4s">
+							<div class="blog-grid-left-big-info">
+								<div class="blog-art-info">
+									<h3><a href="#">Stastics</a></h3>
+									<p>You can also know about the stastics of the amount of precipitation, wind direction,  temeprature of each month on average. Each will give you the data you want, and from which you can make a prediction of the weather condition in the future. </p>
+									<ul class="blog-art-info-stags">
+									  
+										<li class="blog-art-info-stags-right">
+											<ul>
+												<li><a href="#"> <label class="b-icon1"> </label>24</a></li>
+												<li><a href="#"> <label class="b-icon2"> </label>9</a></li>
+											</ul>
+										</li>
+										<div class="clearfix"> </div>
+									</ul>
+								</div>
+							</div>
+							<div class="blog-grid-left-big-pic">
+								<div class="blog-art-pic">
+									<img src="./images/funct3.jpg" title="name" />
+								</div>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+					</div>
+					<div class="blog-grids-right wow bounceIn" data-wow-delay="0.4s">
+						<div class="blog-grid-left blog-grid-right">
+								<div class="blog-art-pic">
+									<img src="./images/funct4.jpg" title="name" />
+								</div>
+								<div class="blog-art-info">
+									<h3><a href="#">BOOKMARK</a></h3>
+									<p>You can also store the view you are watching as a bookmark, so that you can review it any time you want next time. .</p>
+									<ul class="blog-art-info-stags">
+										
+										<li class="blog-art-info-stags-right">
+											<ul>
+												<li><a href="#"> <label class="b-icon1"> </label>24</a></li>
+												<li><a href="#"> <label class="b-icon2"> </label>9</a></li>
+											</ul>
+										</li>
+										<div class="clearfix"> </div>
+									</ul>
+								</div>
+					  </div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<!---- blog-grids ---->
+				</div>
+			</div>
+			<!--- blog ---->
+			<!--- portfolio ---->
+			<div id="port" class="portfolio">
+				<div class="head-section">
+					<div class="container">
+						<h3>portfolio .</h3>
+					</div>
+				</div>
+				<!--- Portfolio --->
+			<div id="port" class="portfolio-box">
+				
+					<!---- start-portfolio-script----->
+					<script type="text/javascript" src="./js/jquery.mixitup.min.js"></script>
+					<script type="text/javascript">
+						$(function () {
+							var filterList = {
+								init: function () {
+								
+									// MixItUp plugin
+									// http://mixitup.io
+									$('#portfoliolist').mixitup({
+										targetSelector: '.portfolio',
+										filterSelector: '.filter',
+										effects: ['fade'],
+										easing: 'snap',
+										// call the hover effect
+										onMixEnd: filterList.hoverEffect()
+									});				
+								
+								},
+								hoverEffect: function () {
+									// Simple parallax effect
+									$('#portfoliolist .portfolio').hover(
+										function () {
+											$(this).find('.label').stop().animate({bottom: 0}, 200, 'easeOutQuad');
+											$(this).find('img').stop().animate({top: -30}, 500, 'easeOutQuad');				
+										},
+										function () {
+											$(this).find('.label').stop().animate({bottom: -40}, 200, 'easeInQuad');
+											$(this).find('img').stop().animate({top: 0}, 300, 'easeOutQuad');								
+										}		
+									);				
+								
+								}
+					
+							};
+							// Run the show!
+							filterList.init();
+						});	
+					</script>
+					<div class="container">
+						<!----//End-portfolio-script----->
+						<ul id="filters" class="clearfix">
+							<li class="filtter-color1"><span class="filter active" data-filter="app card icon logo web">All</span></li>
+							<li class="filtter-color2"><span class="filter" data-filter="app">Storm</span></li>
+							<li class="filtter-color3"><span class="filter" data-filter="card">wind</span></li>
+							<li class="filtter-color4"><span class="filter" data-filter="icon">cloude</span></li>
+							<li class="filtter-color5"><span class="filter" data-filter="app">others</span></li>
+						</ul>
+					</div>
+					<div id="portfoliolist">
+					<div class="portfolio logo1 mix_all port-big-grid wow bounceIn" data-wow-delay="0.5s" data-cat="logo" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s1.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>				
+					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s2.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>		
+					<div class="portfolio web mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="web" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s3.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>				
+					<div class="portfolio icon mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="icon" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s4.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s5.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>			
+					<div class="portfolio card mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s6.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="portfolio icon mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="icon" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s7.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="portfolio app mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="app" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s8.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>			
+					<div class="portfolio card mix_all wow bounceIn" data-wow-delay="0.5s" data-cat="card" style="display: inline-block; opacity: 1;">
+						<div class="portfolio-wrapper">		
+							<a data-toggle="modal" data-target=".bs-example-modal-md" href="#" class="b-link-stripe b-animate-go  thickbox">
+						     <img class="p-img" src="./images/s9.jpg" /><div class="b-wrapper">
+						     	<h2 class="b-animate b-from-left    b-delay03 ">
+						     		<div class="caption">
+						     			<h4>Weather sceneary</h4>
+						     			<p>This is the sceneary of the weather.</p>
+						     		</div>
+						     	</h2>
+						  	</div></a>
+		                </div>
+					</div>	
+					<div class="clearfix"> </div>	
+				</div>
+			</div>
+	</div>
+			</div>
+			<!---- work-with-us---->
+			<div class="work-with-us text-center">
+				<div class="container"></div>
+			</div>
+			<!---- work-with-us---->
+			<!--- portfolio ---->
+			<!---- Team ----->
+			<div id="team" class="team">
+				<div class="head-section">
+					<div class="container">
+						<h3><span>our amazing</span><label>team .</label></h3>
+					</div>
+				</div>
+				<!----sreen-gallery-cursual---->
+						<div class="sreen-gallery-cursual">
+							 <!-- requried-jsfiles-for owl -->
+							<link href="./css/owl.carousel.css" rel="stylesheet">
+							    <script src="./js/owl.carousel.js"></script>
+							        <script>
+							    $(document).ready(function() {
+							      $("#owl-demo").owlCarousel({
+							        items : 3,
+							        lazyLoad : true,
+							        autoPlay : true,
+							        navigation : true,
+							        navigationText :  false,
+							        pagination : false,
+							      });
+							    });
+							    </script>
+							 <!-- //requried-jsfiles-for owl -->
+							 <!-- start content_slider -->
+						       <div id="owl-demo" class="owl-carousel text-center">
+					                <div class="item wow zoomIn" data-wow-delay="0.3s">
+					                	<img class="lazyOwl" data-src="./images/team-member1.jpg" alt="name">
+					                	<h5><span>张</span>贝娜</h5>
+					                	<label>Function</label>
+					                </div>
+					                
+					                <div class="item wow zoomIn" data-wow-delay="0.3s">
+					                	<img class="lazyOwl" data-src="./images/team-member2.jpg" alt="name">
+					                	<h5><span>孙 </span>彦燊</h5>
+					                	<label>Dadabase</label>
+					                </div>
+					                <div class="item wow zoomIn" data-wow-delay="0.3s">
+					                	<img class="lazyOwl" data-src="./images/team-member3.jpg" alt="name">
+					                	<h5><span>王</span> 臻</h5>
+					                	<label>Designing</label>
+					                </div>
+					                
+					                <div class="item wow zoomIn" data-wow-delay="0.3s">
+					                	<img class="lazyOwl" data-src="./images/team-member4.jpg" alt="name">
+					                	<h5><span>厉 </span> 宇燕</h5>
+					                	<label>Data-sorting</label>
+					                </div>
+				              </div>
+						<!--//sreen-gallery-cursual---->
+			</div>
+			</div>
+			<!---- Team ----->
+			<!---- map ---->
+			<div id="contact" class="map">
+				<div class="map-location"></div>
+				
+			<!---- map ---->
+			<div class="clearfix"> </div>
+			<!---- footer --->
+			<div class="footer text-center">
+				<div class="container">
+					<div class="footer-inner wow zoomIn" data-wow-delay="0.3s">
+						<ul>
+							<li><a class="contact-me" href="#">contact us</a></li>
+						</ul>
+					</div>
+					<script type="text/javascript">
+									$(document).ready(function() {
+										/*
+										var defaults = {
+								  			containerID: 'toTop', // fading element id
+											containerHoverID: 'toTopHover', // fading element hover id
+											scrollSpeed: 1200,
+											easingType: 'linear' 
+								 		};
+										*/
+										
+										$().UItoTop({ easingType: 'easeOutQuart' });
+										
+									});
+								</script>
+				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+				</div>
+			</div>
+			<!---- footer --->
+		</div>
+	</body>
+</html>
+

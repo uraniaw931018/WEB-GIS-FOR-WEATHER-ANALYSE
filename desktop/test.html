@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>浙江省天气状况分析</title>
+
+<link rel="stylesheet" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+<link rel="stylesheet" href="http://js.arcgis.com/3.12/dijit/themes/claro/claro.css">
+<link rel="stylesheet" href="http://js.arcgis.com/3.12/dijit/themes/nihilo/nihilo.css">
+<script src="http://js.arcgis.com/3.11/"></script>
+<script>
+	require([
+		"dojo/dom",
+		"esri/Color",
+        "dojo/keys",
+        "dojo/parser",
+
+		"esri/map",
+		"esri/geometry/Extent",
+		"esri/layers/ArcGISDynamicMapServiceLayer",
+		"esri/dijit/OverviewMap",
+		"esri/dijit/Scalebar",
+		"esri/dijit/Legend",
+		"esri/SpatialReference",
+		//"esri/geometry/Point",
+		//"esri/geometry/Circle",
+		//"esri/symbols/SimpleLineSymbol", 
+		//"esri/symbols/SimpleFillSymbol",
+		"esri/graphic",
+		"esri/Color",
+		"esri/layers/GraphicsLayer",
+		
+		"esri/dijit/Measurement",
+		"esri/geometry/Polyline",
+		"esri/config",
+		"esri/sniff",
+		"dojo/keys",
+		"esri/SnappingManager",
+		"esri/tasks/GeometryService",
+		
+		"esri/toolbars/navigation",
+		"esri/tasks/locator",
+		"esri/symbols/PictureMarkerSymbol",
+		"esri/geometry/Point",
+		"esri/InfoTemplate",
+
+        "esri/dijit/Print",
+		"esri/dijit/Bookmarks",
+		
+		"dijit/layout/BorderContainer",
+        "dijit/layout/ContentPane",
+        "dijit/TitlePane",
+        "dijit/form/CheckBox", 
+        "dojo/domReady!"
+	],function(dom,Color,keys,parser,Map,Extent,ArcGISDynamicMapServiceLayer,OverviewMap,Scalebar,Legend,SpatialReference,//Point,Circle,SimpleLineSymbol,SimpleFillSymbol,
+	Graphic,Color,GraphicsLayer,
+	Measurement,Polyline,esriConfig,has,keys,SnappingManager,GeometryService,
+	Navigation,Locator,PictureMarkerSymbol,Point,InfoTemplate,
+	Print,Bookmarks)
+{
+	parser.parse();
+	//地图
+	var map = new Map("map", {
+	basemap: "streets",
+	//center:[120.15443,30.272401],
+	center:[120.00000,28.50000],
+	extent:new Extent({xmin:71.134805,ymin:20.928376,xmax:125.295605,ymax:50.301241,spatialReference:{wkid:4326}}),
+	zoom:7
+});
+	//鹰眼
+	var overviewMapDijit = new OverviewMap({
+		map: map,
+		attachTo: "bottom-right",
+		color:"#D84E13",
+		opacity: 0.40
+	});
+	overviewMapDijit.startup();
+	//比例尺
+	var scalebar = new Scalebar({
+		map:map,
+		attachTo:"bottom-left",
+		color:"blue",
+		width:200,
+		opacity:0.40,
+		visible:true,
+		expandFactor:1.2
+	});
+	//图例
+	var legend = new Legend({
+		map: map
+		}, "legendDiv");
+	legend.startup();
+	//测量
+	var measurement = new Measurement({
+		map: map
+		}, dom.byId("measurementDiv"));
+	measurement.startup();
+	//导航
+	var navigation = new Navigation(map);
+	document.getElementById("zoomin").onclick = function(){
+		navigation.activate(Navigation.ZOOM_IN);
+	}
+	document.getElementById("zoomout").onclick = function(){
+		navigation.activate(Navigation.ZOOM_OUT);
+	}
+	document.getElementById("extent").onclick = function(){
+		navigation.zoomToFullExtent();
+	}
+	document.getElementById("pre").onclick = function(){
+		navigation.zoomToPrevExtent();
+	}
+	document.getElementById("next").onclick = function(){
+		navigation.zoomToNextExtent();
+	}
+	document.getElementById("disable").onclick = function(){
+		navigation.deactivate();
+	}
+	//定位
+	var locator = new Locator("http://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer");
+	document.getElementById("search").onclick = function(){
+		var placename = document.getElementById("searchtext").value;
+		var address = {SingleLine:placename};
+		var option = {
+			address: address,
+			outFields: ["*"]
+     		};
+     	locator.addressToLocations(option);
+		locator.on("address-to-locations-complete", function(evt){
+			map.graphics.clear();
+			var point;
+			point = evt.addresses[0].location;
+			map.centerAndZoom(point, 8);//定位
+
+			//显示该点
+			var pictureMarkerSymbol = new PictureMarkerSymbol("animate.gif", 15, 15);//设置符号
+			//var infoTemplate = new InfoTemplate("Attributes", "${*}");//设置信息窗口
+			var infoTemplate = new InfoTemplate();//设置信息窗口
+			infoTemplate.setTitle(evt.addresses[0].address.toString());
+			infoTemplate.setContent(placename+":Hello~");
+			var graphic = new Graphic(point,pictureMarkerSymbol ,null,infoTemplate);//设置几何图形
+			map.graphics.add(graphic);//将该几何图形添加到地图上
+		});
+	}
+	//打印功能
+	var printer = new esri.dijit.Print({
+		map: map,
+		url: "http://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
+		}, dojo.byId("printButton"));
+	printer.startup();
+	//书签
+	var bookmarks = new esri.dijit.Bookmarks({
+		map: map, 
+		bookmarks: [],
+		editable: true
+		}, dojo.byId('bookmarks'));
+	dojo.connect(bookmark, 'onEdit', refreshBookmarks);
+	dojo.connect(bookmark, 'onRemove', refreshBookmarks);
+	var bmJSON,storageName = 'esrijsapi_mapmarks',useLocalStorage = supports_local_storage();
+	if ( useLocalStorage ) {
+		bmJSON = window.localStorage.getItem(storageName);
+	} else {
+		bmJSON = dojo.cookie(storageName);
+	}
+	if ( bmJSON && bmJSON != 'null' && bmJSON.length > 4) {
+		console.log('cookie: ', bmJSON, bmJSON.length);
+		var bmarks = dojo.fromJson(bmJSON);
+		dojo.forEach(bmarks, function(b) {bookmark.addBookmark(b);});
+        } else {
+		console.log('no stored bookmarks...');
+		var bookmarkPA = {
+			"extent": {
+			"spatialReference": {"wkid":102100},
+			"xmin":-8669334,
+			"ymin":4982379,
+			"xmax":-8664724,
+			"ymax":4984864
+			},
+			"name": "Central Pennsylvania"
+		};
+		bookmark.addBookmark(bookmarkPA);
+	}
+	function refreshBookmarks() {
+		if ( useLocalStorage ) {
+			window.localStorage.setItem(storageName, dojo.toJson(bookmark.toJson()));
+		} else {
+			var exp = 7;
+			dojo.cookie(storageName, dojo.toJson(bookmark.toJson()), {expires: exp});
+		}
+	}
+	function clearBookmarks() {
+		var conf = confirm('Click OK to remove your map bookmarks.');
+		if ( conf ) {
+		if ( useLocalStorage ) {
+		window.localStorage.removeItem(storageName);
+		} else {
+		dojo.cookie(storageName, null, { expires: -1 });
+	}
+	var bmNames = dojo.map(bookmark.bookmarks, function(bm) {
+		if ( bm.name != 'Central Pennsylvania' ) {
+			return bm.name;
+		}
+	});
+	dojo.forEach(bmNames, function(bName) {
+		bookmark.removeBookmark(bName);
+	});
+	alert('Bookmarks Removed.');
+	}
+	}
+	function supports_local_storage() {
+		try {
+		return 'localStorage' in window && window['localStorage'] !== null;
+		} catch( e ){
+		return false;
+		}
+	}
+      
+
+	
+});
+</script>
+<!------FOR DESIGN------>
+<link href="./css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		 <meta name="viewport" content="width=device-width, initial-scale=1">
+		 <link rel="stylesheet" href="./css/jquery.sidr.light.css">
+		 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+		  <link rel="stylesheet" href="./css/style.css">
+		 <script src="./js/jquery.sidr.min.js"></script>
+		 <script type="text/javascript" src="./js/login.js"></script>
+		  <!----images-text-sliedr---->
+		 <link rel="stylesheet" href="./css/responsiveslides.css">
+		<script src="./js/responsiveslides.min.js"></script>
+		  <script>
+		    // You can also use "$(window).load(function() {"
+			    $(function () {
+			      // Slideshow 1
+			      $("#slider1").responsiveSlides({
+			        maxwidth: 1600,
+			        speed: 600
+			      });
+			});
+		  </script>
+		  <!---starrt-bx-slider---->
+		  <!-- bxSlider Javascript file -->
+			<script src="./js/jquery.bxslider.min.js"></script>
+			<!-- bxSlider CSS file -->
+			<link href="./css/jquery.bxslider.css" rel="stylesheet" />
+			<script>
+				$(document).ready(function(){
+					  $('.bxslider').bxSlider();
+				});
+			</script>
+			<!----progress-meter---->
+			<script>
+				$(function() {
+					$(".meter > span").each(function() {
+						$(this)
+							.data("origWidth", $(this).width())
+							.width(0)
+							.animate({
+								width: $(this).data("origWidth")
+							}, 1200);
+					});
+				});
+			</script>
+			<!----//progress-meter---->
+
+<!----FOR STATISTICS---->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+<script language="javascript" type="text/javascript">
+function onSelect() { 
+	var index=parseInt(document.getElementById("combox1").options[window.document.getElementById("combox1").selectedIndex].value);
+	//alert(index);
+	switch (index){
+	case 1:
+		window.open ('Hangzhou.html', 'newwindow', 'height=400, top=200,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+		break
+	case 2:
+		window.open ('Ningbo.html', 'newwindow', 'height=400, top=200,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+		break
+	case 3:
+		window.open ('Wenzhou.html', 'newwindow', 'height=400, top=200,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+		break
+	case 4:
+		window.open ('Shaoxing.html', 'newwindow', 'height=400, top=200,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+		break
+	case 5:
+		window.open ('Huzhou.html', 'newwindow', 'height=400, top=200,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
+		break
+	};
+	;
+};
+</script>
+</head>
+<body>
+    <div id="map" style="position:absolute;height:500px;width:900px;border:1px solid gray;boder-color:#63F;"></div>
+    <div id="legendDiv" style="position:absolute;left:910px;top:5px;border:1px solid gray;height:500px;width:400px;boder-color:#63F;"></div>
+   
+    <div style="position:absolute;left:910px;top:2px;border:1px solid gray;height:500px;width:400px;boder-color:#63F;">
+          <section class="tabs">
+                    <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1">
+                  <label for="tab-1" class="tab-label-1"><span> </span>Navigation</label>
+          
+                    <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" checked="checked">
+                  <label for="tab-2" class="tab-label-2"><span> </span>Statistic</label>
+          
+                    <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3">
+                  <label for="tab-3" class="tab-label-3"><span> </span>Measurement</label>
+            
+                    <input id="tab-4" type="radio" name="radio-set" class="tab-selector-4">
+                  <label for="tab-4" class="tab-label-4"><span> </span>Others</label>
+                <div class="clear-shadow"></div>
+              
+                  <div class="content_tabs">
+                    <div class="content-1">
+                      <h5>
+                      	<button id="zoomin" class = "g-btngreen" >放大</button>
+                      	<button id="zoomout" class = "g-btngreen">缩小</button>
+                      	<pan></pan>
+                      	<button id="pre" class = "g-btngreen">前一视图</button>
+                      	<button id="next" class = "g-btngreen">后一视图</button>
+                      	<button id="extent" class = "g-btngreen">全图</button>
+                      	<button id="disable" class = "g-btngreen">禁用导航</button>
+                      	<p>定位Locator：</p>
+                      	<input id ="searchtext" type="text"> <button id="search" class = "g-btngreen" >搜索</button>
+                      	<!--打印 -->
+                      	<p id="printButton" ></p>
+                      </h5>
+                  </div>
+                    <div  class="content-2" >
+                    	<!----star-wrapper-demo------->
+			<div class="wrapper-demo">
+				<!-----start-wrapper-dropdown-2---->
+					<div id="dd" class="wrapper-dropdown-2" tabindex="1">menu<span><img src="downlist/images/menu.png"/></span>
+							<select name="combox1" id="combox1" onChange="onSelect()">   
+        							<option value="1">杭州市</option>   
+        							<option value="2">宁波市</option>   
+        							<option value="3">温州市</option>   
+        							<option value="4">绍兴市</option>   
+        							<option value="5">湖州市</option>            
+      							</select>   
+					</div>
+			</div>
+			<!-----end-wrapper-dropdown-2---->
+			<!-----start-script---->
+			<script type="text/javascript">
+							function DropDown(el) {
+								this.dd = el;
+								this.initEvents();
+							}
+							DropDown.prototype = {
+								initEvents : function() {
+									var obj = this;
+				
+									obj.dd.on('click', function(event){
+										$(this).toggleClass('active');
+										event.stopPropagation();
+									});	
+								}
+							}
+							$(function() {
+				
+								var dd = new DropDown( $('#dd') );
+				
+								$(document).click(function() {
+									// all dropdowns
+									$('.wrapper-dropdown-2').removeClass('active');
+								});
+				
+							});
+			</script>
+			<!-----end-script---->
+			<!----end-wrapper-demo----->
+			<!-----start-copyright---->
+			<div class="copy-right">
+					<p>&#169 2014 Template by <a href="http://w3layouts.com" target="_blank">w3layouts</a> </p>
+			</div>
+			<!-----end-copyright---->
+              <div class="clear"></div>
+                  </div>
+                    <div class="content-3">
+                    		<div id="measurementDiv"></div>
+                    </div>
+                  <div class="content-4">
+                  	<div id="bookmarks"></div>
+                  </div>
+                  </div>
+      </section>
+        </div>
+
+</body>
+
+</html>
